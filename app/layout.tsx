@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Montserrat, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
-import '../styles/globals.css'
+import './globals.css'
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -46,3 +46,4 @@ export default function RootLayout({
     </html>
   )
 }
+

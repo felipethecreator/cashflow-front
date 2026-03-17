@@ -182,12 +182,14 @@ export default function DashboardPage() {
                   </p>
                 )}
               </div>
-              {card.showProgress && (
-                <Progress 
-                  value={summary.paidPercentage} 
-                  className="mt-3 h-2"
-                />
-              )}
+              <div className="mt-3 h-2">
+                {card.showProgress ? (
+                  <Progress
+                    value={summary.paidPercentage}
+                    className="h-2"
+                  />
+                ) : null}
+              </div>
             </GlassCard>
           </motion.div>
         ))}
@@ -332,3 +334,4 @@ export default function DashboardPage() {
     </div>
   )
 }
+

@@ -12,6 +12,7 @@ import type {
   PaymentState,
 } from './types'
 import * as api from './api'
+import { toast } from 'sonner'
 
 const PAYMENT_META_STORAGE_KEY = 'cashflow-payment-meta'
 
@@ -295,7 +296,8 @@ export const useCategoryStore = create<CategoryState>()((set, get) => ({
 
       set({ categories, isLoading: false })
     } catch (error) {
-      console.error('Erro ao carregar categorias:', error)
+      const message = error instanceof Error ? error.message : 'Erro ao carregar categorias'
+      toast.error(message)
       set({ categories: [], isLoading: false })
     }
   },
@@ -381,7 +383,8 @@ export const useExpenseStore = create<ExpenseState>()((set, get) => ({
 
       set({ expenses, isLoading: false })
     } catch (error) {
-      console.error('Erro ao carregar despesas:', error)
+      const message = error instanceof Error ? error.message : 'Erro ao carregar despesas'
+      toast.error(message)
       set({ expenses: [], isLoading: false })
     }
   },
@@ -487,7 +490,8 @@ export const usePaymentStore = create<PaymentState>()((set, get) => ({
 
       set({ payments, isLoading: false })
     } catch (error) {
-      console.error('Erro ao carregar pagamentos:', error)
+      const message = error instanceof Error ? error.message : 'Erro ao carregar pagamentos'
+      toast.error(message)
       set({ payments: [], isLoading: false })
     }
   },
@@ -556,4 +560,5 @@ export const usePaymentStore = create<PaymentState>()((set, get) => ({
     }
   },
 }))
+
 

@@ -23,8 +23,8 @@ export const useCategoriesStore = create<CategoriesState>((set, get) => ({
       set({ categories, loading: false });
     } catch (error) {
       set({ loading: false });
-      toast.error('Erro ao carregar categorias');
-      console.error(error);
+      const message = error instanceof Error ? error.message : 'Erro ao carregar categorias';
+      toast.error(message);
     }
   },
 

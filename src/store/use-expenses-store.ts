@@ -23,8 +23,8 @@ export const useExpensesStore = create<ExpensesState>((set, get) => ({
       set({ expenses, loading: false });
     } catch (error) {
       set({ loading: false });
-      toast.error('Erro ao carregar despesas');
-      console.error(error);
+      const message = error instanceof Error ? error.message : 'Erro ao carregar despesas';
+      toast.error(message);
     }
   },
 

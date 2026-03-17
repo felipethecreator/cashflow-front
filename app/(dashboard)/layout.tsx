@@ -157,7 +157,7 @@ export default function DashboardLayout({
           {/* Footer */}
           <div className="p-4 border-t border-border">
             <p className="text-xs text-muted-foreground text-center">
-              CashFlow v1.0.0
+              CashFlow v1.0.0. &copy; 2026. Todos os direitos reservados.
             </p>
           </div>
         </div>
