@@ -93,6 +93,10 @@ export default function DashboardPage() {
     return Object.values(breakdown)
   }, [payments, expenses, categories])
 
+  const totalCategoryAmount = useMemo(() => {
+    return categoryBreakdown.reduce((acc, item) => acc + item.total, 0)
+  }, [categoryBreakdown])
+
   const handleMarkAsPaid = async (paymentId: string, paymentName: string) => {
     try {
       await markAsPaid(paymentId)
@@ -221,8 +225,7 @@ export default function DashboardPage() {
                     outerRadius={80}
                     innerRadius={50}
                     paddingAngle={2}
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    labelLine={false}
+                    label={false}
                   >
                     {categoryBreakdown.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -236,7 +239,13 @@ export default function DashboardPage() {
                       borderRadius: '8px'
                     }}
                   />
-                  <Legend />
+                  <Legend
+                    formatter={(value: string, entry: { payload?: { total?: number } }) => {
+                      const itemTotal = entry.payload?.total ?? 0
+                      const percent = totalCategoryAmount > 0 ? Math.round((itemTotal / totalCategoryAmount) * 100) : 0
+                      return `${value} (${percent}%)`
+                    }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
@@ -334,4 +343,7 @@ export default function DashboardPage() {
     </div>
   )
 }
+
+
+
 
